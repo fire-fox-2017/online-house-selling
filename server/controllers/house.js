@@ -1,4 +1,5 @@
 const House = require('../models/house');
+const curHelper = require('../helpers/numeral');
 const methods = {};
 
 methods.create = (req, res, next) => {
@@ -49,7 +50,20 @@ methods.gets = (req, res, next) => {
     if(err) {
       res.json({error: err, success:false});
     } else {
-      res.json({houses: houses, success: true});
+      let arr = [];
+      houses.forEach(val => {
+        let obj = {};
+        obj._id = val._id;
+        obj.updatedAt = val.updatedAt;
+        obj.createdAt = val.createdAt;
+        obj.title = val.title;
+        obj.description = val.description;
+        obj.price = curHelper.convert(val.price);
+        obj.image = val.image;
+        obj.address = val.address
+        arr.push(obj)
+      })
+      res.json({houses: arr, success: true});
     }
   })
 }
