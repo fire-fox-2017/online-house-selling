@@ -16,7 +16,7 @@
           <textarea name="description" placeholder="Deskripsikan lebih jauh tentang rumahmu" rows="2" style="margin-top: 0px; margin-bottom: 0px; height: 58px;" v-model="newHouse.description"></textarea>
         </div>
         
-        <button @click="onEditHouse()" class="ui primary button">Submit</button>
+        <button @click="onEditHouse(newHouse)" class="ui primary button">Submit</button>
         
         <a href="#/"><button class="ui red button">Back to main</button></a>
       </div>
@@ -37,21 +37,19 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getOneHouse'
-  ])
+      'getOneHouse',
+      'updateHouse'
+  ]),
+    onEditHouse(house) {
+    this.updateHouse(house)
   },
-  onEditHouse() {
+  },
 
-  },
   computed: {
     ...mapGetters([
-    'houses',
     'newHouse'
   ])
   },
-  mounted() {
-    // this.getOneHouse(this.newHouse)
-  }
 };
 </script>
 

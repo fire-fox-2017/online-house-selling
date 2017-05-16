@@ -11,6 +11,13 @@ const state = {
     price: '',
     image: '',
     address: '',
+  },
+  emptyHouse: {
+    title: '',
+    description: '',
+    price: '',
+    image: '',
+    address: '',
   }
 }
 
@@ -30,6 +37,9 @@ const mutations = { // untuk merubah kondisi state
     state.houses.splice(state.houses.indexOf(house), 1, house);
   },
   GET_ONE(state, house) {
+    state.newHouse = house
+  },
+  EMPTY_HOUSE_DATA(state, house) {
     state.newHouse = house
   }
 }
@@ -69,6 +79,22 @@ const actions = { // untuk melakukan req ke db n commit mutations
   },
   getOneHouse({commit}, house) {
     commit('GET_ONE', house)
+  },
+  updateHouse({commit}, house) {
+    axios.put(`http://localhost:3000/api/house/edit/${house._id}`, {
+      title: house.title,
+      description: house.description,
+      price: house.price,
+      image: house.image,
+      address: house.address
+    }).then(res => {
+      window.location.href = '#/'
+      // console.log(res.data.house);
+      commit('UPDATE_HOUSE', house);
+    })
+  },
+  emptyHouseData({commit}, house) {
+    commit('EMPTY_HOUSE_DATA', house);
   }
 }
 
@@ -78,6 +104,9 @@ const getters = { // untuk me return state
   },
   newHouse(state) {
     return state.newHouse;
+  },
+  emptyHouse(state) {
+    return state.emptyHouse;
   }
 }
 
