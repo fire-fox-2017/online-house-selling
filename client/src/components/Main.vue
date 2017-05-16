@@ -19,7 +19,7 @@
           Rp. {{house.price}}
         </div>
         <div class="meta">
-          <div class="ui red button label"><i class="trash icon"></i> Delete</div>
+          <div @click="confirmDelete(house._id)" class="ui red button label"><i class="trash icon"></i> Delete</div>
           <div class="ui blue button label"><i class="edit icon"></i> Edit</div>
         </div>
       </div>
@@ -41,8 +41,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getHouses'
-    ])
+      'getHouses',
+      'deleteHouse'
+    ]),
+    confirmDelete(houseId) {
+      var confirmed = confirm('Are you sure want to delete this house from our list?');
+      if(confirmed)
+        this.deleteHouse(houseId)
+    }
   },
   computed: {
     ...mapGetters([

@@ -21,9 +21,10 @@ const mutations = { // untuk merubah kondisi state
   ADD_HOUSE(state, payload) {
     state.houses.push(payload)
   },
-  DEL_HOUSES(state, payload) {
-    let houseIdx = state.houses.findIndex(house => house._id == payload);
-    state.house.splice(houseIdx, 1);
+  DEL_HOUSE(state, payload) {
+    let houseIdx = state.houses.findIndex(val => val._id === payload);
+    state.houses.splice(houseIdx, 1);
+    // console.log('state.houses', state.houses.findIndex(val => val._id === payload))
   },
   UPDATE_HOUSE(state, house) {
     state.houses.splice(state.houses.indexOf(house), 1, house);
@@ -60,7 +61,10 @@ const actions = { // untuk melakukan req ke db n commit mutations
     axios.delete(`http://localhost:3000/api/house/delete/${houseId}`)
     .then(res => {
       console.log(res.data.done);
-
+      commit('DEL_HOUSE', houseId);
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
 }
