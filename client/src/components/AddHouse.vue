@@ -2,7 +2,7 @@
   <div id="add-form">
     <div class="ui form">
       <h3>Add New House</h3>
-      <form class="field" id="form-tambah" method="POST">
+      <div class="field" id="form-tambah">
         <label for="title">Judul:</label>
         <input name="title" type="text" placeholder="Judul yang menarik" class="input" v-model="newHouse.title">
         <label for="price">Harga rumah ini:</label>
@@ -19,7 +19,7 @@
         <button @click="addHouse(newHouse)" class="ui primary button">Submit</button>
         
         <a href="#/"><button class="ui red button">Back to main</button></a>
-      </form>
+      </div>
     </div>
   </div>
 </template>

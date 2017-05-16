@@ -3,7 +3,7 @@
     <div class="ui header center aligned dividing">
       <h1 class="head"><i class="fort awesome icon"></i>Most Wanted Houses</h1>
     </div>
-    <div v-for="house in houses" class="item">
+    <div v-for="(house, index) in houses" class="item">
       <div class="ui medium image">
         <img :src="house.image" draggable="true" data-bukket-ext-bukket-draggable="true">
       </div>
@@ -22,6 +22,7 @@
           <div @click="confirmDelete(house._id)" class="ui red button label"><i class="trash icon"></i> Delete</div>
           <div class="ui blue button label"><i class="edit icon"></i> Edit</div>
         </div>
+
       </div>
     </div>
   </div>
