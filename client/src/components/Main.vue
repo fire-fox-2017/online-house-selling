@@ -20,7 +20,9 @@
         </div>
         <div class="meta">
           <div @click="confirmDelete(house._id)" class="ui red button label"><i class="trash icon"></i> Delete</div>
-          <div class="ui blue button label"><i class="edit icon"></i> Edit</div>
+          <a @click="userClickUpdate(house)">
+            <router-link  :to="{name: 'EditHouse', params: {houseId: house._id}}" class="ui blue button label"><i class="edit icon"></i> Edit</router-link>
+          </a>
         </div>
 
       </div>
@@ -43,17 +45,22 @@ export default {
   methods: {
     ...mapActions([
       'getHouses',
-      'deleteHouse'
+      'deleteHouse',
+      'getOneHouse'
     ]),
     confirmDelete(houseId) {
       var confirmed = confirm('Are you sure want to delete this house from our list?');
       if(confirmed)
         this.deleteHouse(houseId)
-    }
+    },
+    userClickUpdate(house) {
+      this.getOneHouse(house)
+    },
   },
   computed: {
     ...mapGetters([
-      'houses'
+      'houses',
+      'newHouse'
     ])
   },
   mounted() {

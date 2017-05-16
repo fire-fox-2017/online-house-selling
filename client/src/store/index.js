@@ -60,12 +60,15 @@ const actions = { // untuk melakukan req ke db n commit mutations
   deleteHouse({commit}, houseId) {
     axios.delete(`http://localhost:3000/api/house/delete/${houseId}`)
     .then(res => {
-      console.log(res.data.done);
+      console.log('DEL_HOUSE', res.data.done);
       commit('DEL_HOUSE', houseId);
     })
     .catch(err => {
       console.log(err);
     })
+  },
+  getOneHouse({commit}, house) {
+    commit('GET_ONE', house)
   }
 }
 
