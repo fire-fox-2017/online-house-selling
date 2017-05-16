@@ -54,4 +54,15 @@ methods.gets = (req, res, next) => {
   })
 }
 
+methods.get = (req, res, next) => {
+  houseId = req.params.houseId;
+  House.findOne({_id: houseId}, (err, house) => {
+    if(err) {
+      res.json({error: err, success: false});
+    } else {
+      res.json({house: house, success: true});
+    }
+  })
+}
+
 module.exports = methods;
